@@ -95,7 +95,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        self.handleNotFound()
+        self.handleAddMember()
             
     def do_POST(self):
         xSplit = self.path.split('/')
