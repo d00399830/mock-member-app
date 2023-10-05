@@ -93,7 +93,10 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Accept, Content-Type, Origin")
         self.end_headers()
-        
+
+    def do_GET(self):
+        self.handleNotFound()
+            
     def do_POST(self):
         xSplit = self.path.split('/')
         if xSplit[1] == "addMember":
