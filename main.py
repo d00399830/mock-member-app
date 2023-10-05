@@ -115,7 +115,7 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 def main():
     #The main function <(*.*<) (^*.*^) (>*.*)>
     print("Beep Boop: Server Initialized - Please build additional Pylons")
-    listen = ("0.0.0.0", 8080)
+    listen = ("0.0.0.0", 80)
     server = ThreadedHTTPServer(listen, MyRequestHandler)
     server.serve_forever()  
     
