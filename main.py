@@ -78,10 +78,10 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.end_headers()
         except:
-            response = {"response": {"status":"failure"}}
-            self.wfile.write(bytes(json.dumps(response), "utf-8"))
+            response = {"response": {"status":"failure"}}            
             self.send_response(500)
             self.end_headers()
+            self.wfile.write(bytes(json.dumps(response), "utf-8"))
 
     def do_OPTIONS(self):
         self.send_response(200)
