@@ -20,7 +20,6 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(bytes("Invalid endpoint", "utf-8"))
 
     def handleAddMember(self):
-        global MembersDict
         length = int(self.headers["Content-Length"])
         body = json.loads(self.rfile.read(length))
         try:
@@ -28,7 +27,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             email = body['request']['email']
             phone = body['request']['phone']
             memberID = random.choice([i for i in range(0,9999) if i not in MembersDict.keys()])
-            MembersDict[memberID] = {"memberID": memberID, "name": name, "email": email, "phone": phone}
+            MyRequestHandler.MembersDict[memberID] = {"memberID": memberID, "name": name, "email": email, "phone": phone}
             response = {"response": {"memberID":memberID}}
             self.send_response(200)
             self.end_headers()
@@ -38,12 +37,11 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
 
     def handleInquireMember(self):
-        global MembersDict
         length = int(self.headers["Content-Length"])
         body = json.loads(self.rfile.read(length))
         try:
             memberID = body['request']['memberID']
-            member = MembersDict[memberID]
+            member = MyRequestHandler.MembersDict[memberID]
             response = {"response": member}
             self.send_response(200)
             self.end_headers()
@@ -53,7 +51,6 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
 
     def handleUpdateMember(self):
-        global MembersDict
         length = int(self.headers["Content-Length"])
         body = json.loads(self.rfile.read(length))
         try:
@@ -61,7 +58,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             name = body['request']['name']
             email = body['request']['email']
             phone = body['request']['phone']
-            MembersDict[memberID] = {"memberID": memberID, "name": name, "email": email, "phone": phone}
+            MyRequestHandler.MembersDict[memberID] = {"memberID": memberID, "name": name, "email": email, "phone": phone}
             response = {"response": {"memberID":memberID}}
             self.send_response(200)
             self.end_headers()
@@ -71,12 +68,11 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
     
     def handleRemoveMember(self):
-        global MembersDict
         length = int(self.headers["Content-Length"])
         body = json.loads(self.rfile.read(length))
         try:
             memberID = body['request']['memberID']
-            MembersDict.pop(memberID)
+            MyRequestHandler.MembersDict.pop(memberID)
             response = {"response": {"status":"success"}}
             self.wfile.write(bytes(json.dumps(response), "utf-8"))
             self.send_response(200)
