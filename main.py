@@ -122,7 +122,7 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 def main():
     #The main function <(*.*<) (^*.*^) (>*.*)>
     print("Beep Boop: Server Initialized - Please build additional Pylons")
-    port = 8080
+    port = 80
     if "PORT" in os.environ:
         port = int(os.environ["PORT"])
     listen = ("0.0.0.0", port)
