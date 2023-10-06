@@ -26,7 +26,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             name = body['request']['name']
             email = body['request']['email']
             phone = body['request']['phone']
-            memberID = random.choice([i for i in range(0,9999) if i not in MembersDict.keys()])
+            memberID = random.choice([i for i in range(0,9999) if i not in MyRequestHandler.MembersDict.keys()])
             MyRequestHandler.MembersDict[memberID] = {"memberID": memberID, "name": name, "email": email, "phone": phone}
             response = {"response": {"memberID":memberID}}
             self.send_response(200)
